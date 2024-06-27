@@ -1,0 +1,51 @@
+kind: Gateway
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: external-http
+  namespace: online-boutique
+spec:
+  gatewayClassName: gke-l7-global-external-managed-mc
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+      allowedRoutes:
+        kinds:
+          - kind: HTTPRoute
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: public-store-route
+  namespace: online-boutique
+  labels:
+    gateway: external-http
+spec:
+  hostnames:
+    - "store.example.com"
+  parentRefs:
+    - name: external-http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /nane1
+      backendRefs:
+        - group: net.gke.io
+          kind: ServiceImport
+          name: frontend-nane-1
+          port: 8080
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /nane2
+      backendRefs:
+        - group: net.gke.io
+          kind: ServiceImport
+          name: frontend-nane-2
+          port: 8080
+    - backendRefs:
+        - group: net.gke.io
+          kind: ServiceImport
+          name: frontend
+          port: 8080
