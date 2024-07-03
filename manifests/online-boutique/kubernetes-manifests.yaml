@@ -816,6 +816,8 @@ metadata:
   name: frontend-nane-1
   labels:
     app: frontend
+annotations:
+  configsync.gke.io/cluster-name-selector: gke-cls-prd-2
 spec:
   type: ClusterIP
   selector:
@@ -824,14 +826,14 @@ spec:
     - name: http
       port: 80
       targetPort: 8080
----
-kind: ServiceExport
-apiVersion: net.gke.io/v1
-metadata:
-  name: frontend-nane-1
-  namespace: online-boutique
-annotations:
-  configsync.gke.io/cluster-name-selector: gke-cls-prd-2
+#---
+#kind: ServiceExport
+#apiVersion: net.gke.io/v1
+#metadata:
+#name: frontend-nane-1
+#namespace: online-boutique
+#annotations:
+#configsync.gke.io/cluster-name-selector: gke-cls-prd-2
 ---
 apiVersion: v1
 kind: Service
@@ -839,6 +841,8 @@ metadata:
   name: frontend-nane-2
   labels:
     app: frontend
+annotations:
+  configsync.gke.io/cluster-name-selector: gke-cls-prd-3
 spec:
   type: ClusterIP
   selector:
@@ -847,14 +851,14 @@ spec:
     - name: http
       port: 80
       targetPort: 8080
----
-kind: ServiceExport
-apiVersion: net.gke.io/v1
-metadata:
-  name: frontend-nane-2
-  namespace: online-boutique
-annotations:
-  configsync.gke.io/cluster-name-selector: gke-cls-prd-3
+#---
+#kind: ServiceExport
+#apiVersion: net.gke.io/v1
+#metadata:
+#name: frontend-nane-2
+#namespace: online-boutique
+#annotations:
+#configsync.gke.io/cluster-name-selector: gke-cls-prd-3
 ---
 apiVersion: v1
 kind: ServiceAccount
