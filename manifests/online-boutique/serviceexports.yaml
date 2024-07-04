@@ -57,3 +57,63 @@ metadata:
   #configmanagement.gke.io/cluster-selector: cluster-prd-3-selector
   annotations:
     configsync.gke.io/cluster-name-selector: gke-cls-prd-3
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: currencyservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: productcatalogservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: checkoutservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: shippingservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: cartservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: redis-cart
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: emailservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: paymentservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: recommendationservice
+  namespace: online-boutique
+---
+kind: ServiceExport
+apiVersion: net.gke.io/v1
+metadata:
+  name: adservice
+  namespace: online-boutique
