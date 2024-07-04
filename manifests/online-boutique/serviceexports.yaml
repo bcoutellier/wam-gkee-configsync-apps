@@ -6,7 +6,7 @@ metadata:
   labels:
     app: frontend
   annotations:
-    configsync.gke.io/cluster-name: cluster-prd-2-selector
+    configmanagement.gke.io/cluster-selector: cluster-prd-2-selector
 spec:
   type: ClusterIP
   selector:
@@ -22,7 +22,7 @@ metadata:
   name: frontend-nane-1
   namespace: online-boutique
   annotations:
-    configsync.gke.io/cluster-name: cluster-prd-2-selector
+    configmanagement.gke.io/cluster-selector: cluster-prd-2-selector
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +32,7 @@ metadata:
   labels:
     app: frontend
   annotations:
-    configsync.gke.io/cluster-name: cluster-prd-3-selector
+    configmanagement.gke.io/cluster-selector: cluster-prd-3-selector
 spec:
   type: ClusterIP
   selector:
@@ -48,4 +48,4 @@ metadata:
   name: frontend-nane-2
   namespace: online-boutique
   annotations:
-    configsync.gke.io/cluster-name: cluster-prd-3-selector
+    configmanagement.gke.io/cluster-selector: cluster-prd-3-selector
