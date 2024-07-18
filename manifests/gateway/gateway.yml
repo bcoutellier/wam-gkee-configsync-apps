@@ -3,6 +3,8 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: external-http
   namespace: online-boutique
+  annotations:
+    configsync.gke.io/cluster-name-selector: gke-cls-prd-1
 spec:
   gatewayClassName: gke-l7-global-external-managed-mc
   listeners:
@@ -26,24 +28,6 @@ spec:
   parentRefs:
     - name: external-http
   rules:
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /nane1
-      backendRefs:
-        - group: net.gke.io
-          kind: ServiceImport
-          name: frontend-nane-1
-          port: 80
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /nane2
-      backendRefs:
-        - group: net.gke.io
-          kind: ServiceImport
-          name: frontend-nane-2
-          port: 80
     - backendRefs:
         - group: net.gke.io
           kind: ServiceImport
