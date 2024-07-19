@@ -1,0 +1,241 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: adservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: adservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+      to:
+        - operation:
+            paths:
+              - /hipstershop.AdService/GetAds
+            methods:
+              - POST
+            ports:
+              - "9555"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: shippingservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: shippingservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.ShippingService/GetQuote
+              - /hipstershop.ShippingService/ShipOrder
+            methods:
+              - POST
+            ports:
+              - "50051"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: recommendationservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: recommendationservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+      to:
+        - operation:
+            paths:
+              - /hipstershop.RecommendationService/ListRecommendations
+            methods:
+              - POST
+            ports:
+              - "8080"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: productcatalogservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: productcatalogservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+              - cluster.local/ns/online-boutique/sa/recommendationservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.ProductCatalogService/GetProduct
+              - /hipstershop.ProductCatalogService/ListProducts
+            methods:
+              - POST
+            ports:
+              - "3550"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: paymentservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: paymentservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.PaymentService/Charge
+            methods:
+              - POST
+            ports:
+              - "50051"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: frontend
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  rules:
+    - to:
+        - operation:
+            methods:
+              - GET
+              - POST
+            ports:
+              - "8080"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: emailservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: emailservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.EmailService/SendOrderConfirmation
+            methods:
+              - POST
+            ports:
+              - "8080"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: currencyservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: currencyservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.CurrencyService/Convert
+              - /hipstershop.CurrencyService/GetSupportedCurrencies
+            methods:
+              - POST
+            ports:
+              - "7000"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: deny-all
+  namespace: online-boutique
+spec: {}
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: checkoutservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: checkoutservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+      to:
+        - operation:
+            paths:
+              - /hipstershop.CheckoutService/PlaceOrder
+            methods:
+              - POST
+            ports:
+              - "5050"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: cartservice
+  namespace: online-boutique
+spec:
+  selector:
+    matchLabels:
+      app: cartservice
+  rules:
+    - from:
+        - source:
+            principals:
+              - cluster.local/ns/online-boutique/sa/frontend
+              - cluster.local/ns/online-boutique/sa/checkoutservice
+      to:
+        - operation:
+            paths:
+              - /hipstershop.CartService/AddItem
+              - /hipstershop.CartService/GetCart
+              - /hipstershop.CartService/EmptyCart
+            methods:
+              - POST
+            ports:
+              - "7070"
