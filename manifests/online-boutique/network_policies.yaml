@@ -282,7 +282,9 @@ metadata:
   name: allow-google-health-checks
   namespace: online-boutique
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels:
+      app: frontend
   policyTypes:
     - Ingress
   ingress:
