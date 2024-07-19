@@ -293,4 +293,8 @@ spec:
             cidr: 35.191.0.0/16
       ports:
         - protocol: TCP
-          port: 0-65535
+          port: 80
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 8080
