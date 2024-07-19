@@ -279,7 +279,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-google-health-checks
+  name: allow-google-health-checks-ingress
   namespace: online-boutique
 spec:
   podSelector:
@@ -293,6 +293,10 @@ spec:
             cidr: 130.211.0.0/22
         - ipBlock:
             cidr: 35.191.0.0/16
+        - ipBlock:
+            cidr: 35.190.0.0/16
+        - ipBlock:
+            cidr: 169.254.169.254/32
       ports:
         - protocol: TCP
           port: 80
@@ -301,35 +305,31 @@ spec:
         - protocol: TCP
           port: 8080
 ---
-apiVersion: networking.istio.io/v1
-kind: ServiceEntry
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
-  name: allow-egress-googleapis
+  name: allow-googleapis-egress
+  namespace: online-boutique
 spec:
-  hosts:
-    - "accounts.google.com" # Used to get token
-    - "*.googleapis.com"
-  ports:
-    - number: 80
-      protocol: HTTP
-      name: http
-    - number: 443
-      protocol: HTTPS
-      name: https
----
-apiVersion: networking.istio.io/v1
-kind: ServiceEntry
-metadata:
-  name: allow-egress-google-metadata
-spec:
-  hosts:
-    - metadata.google.internal
-  addresses:
-    - 169.254.169.254 # GCE metadata server
-  ports:
-    - number: 80
-      name: http
-      protocol: HTTP
-    - number: 443
-      name: https
-      protocol: HTTPS
+  podSelector:
+    matchLabels:
+      app: frontend
+  policyTypes:
+    - Egress
+  egress::
+    - to:
+        - ipBlock:
+            cidr: 130.211.0.0/22
+        - ipBlock:
+            cidr: 35.191.0.0/16
+        - ipBlock:
+            cidr: 35.190.0.0/16
+        - ipBlock:
+            cidr: 169.254.169.254/32
+      ports:
+        - protocol: TCP
+          port: 80
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 8080
