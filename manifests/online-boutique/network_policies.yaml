@@ -273,6 +273,8 @@ spec:
       ports:
         - port: 6379
           protocol: TCP
+        - port: 7070
+          protocol: TCP
   egress:
     - {}
 ---
