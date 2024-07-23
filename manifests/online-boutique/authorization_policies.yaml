@@ -187,13 +187,6 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: deny-all
-  namespace: online-boutique
-spec: {}
----
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
   name: checkoutservice
   namespace: online-boutique
 spec:
