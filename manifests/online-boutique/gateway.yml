@@ -31,10 +31,10 @@ spec:
     logConfig:
       enabled: true
     config:
-      type: TCP
+      type: HTTP
       httpHealthCheck:
         port: 80
-        requestPath: "/"
+        requestPath: "/_healthz"
         proxyHeader: NONE
   targetRef:
     group: net.gke.io
