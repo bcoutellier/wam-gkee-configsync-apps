@@ -50,7 +50,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/currencyservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/currencyservice
+          image: gcr.io/google-samples/microservices-demo/currencyservice:latest
           ports:
             - name: grpc
               containerPort: 7000
@@ -125,7 +125,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/productcatalogservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/productcatalogservice
+          image: gcr.io/google-samples/microservices-demo/productcatalogservice:latest
           ports:
             - containerPort: 3550
           env:
@@ -198,7 +198,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/checkoutservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/checkoutservice
+          image: gcr.io/google-samples/microservices-demo/checkoutservice:latest
           ports:
             - containerPort: 5050
           readinessProbe:
@@ -281,7 +281,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/shippingservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/shippingservice
+          image: gcr.io/google-samples/microservices-demo/shippingservice:latest
           ports:
             - containerPort: 50051
           env:
@@ -356,7 +356,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/cartservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/cartservice
+          image: gcr.io/google-samples/microservices-demo/cartservice:latest
           ports:
             - containerPort: 7070
           env:
@@ -500,7 +500,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/emailservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/emailservice
+          image: gcr.io/google-samples/microservices-demo/emailservice:latest
           ports:
             - containerPort: 8080
           env:
@@ -576,7 +576,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/paymentservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/paymentservice
+          image: gcr.io/google-samples/microservices-demo/paymentservice:latest
           ports:
             - containerPort: 50051
           env:
@@ -651,7 +651,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/frontend:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/frontend
+          image: gcr.io/google-samples/microservices-demo/frontend:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -770,7 +770,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/recommendationservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/recommendationservice
+          image: gcr.io/google-samples/microservices-demo/recommendationservice:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -848,7 +848,7 @@ spec:
             privileged: false
             readOnlyRootFilesystem: true
           #image: gcr.io/google-samples/microservices-demo/adservice:v0.10.0
-          image: gcr.io/google-samples/microservices-demo/adservice
+          image: gcr.io/google-samples/microservices-demo/adservice:latest
           ports:
             - containerPort: 9555
           env:
@@ -919,7 +919,7 @@ spec:
       containers:
         - name: main
           #image: gcr.io/google-samples/microservices-demo/loadgenerator:v0.3.6
-          image: gcr.io/google-samples/microservices-demo/loadgenerator
+          image: gcr.io/google-samples/microservices-demo/loadgenerator:latest
           env:
             - name: FRONTEND_ADDR
               value: "frontend.frontend.svc.cluster.local:80"
