@@ -2,7 +2,7 @@ kind: Gateway
 apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: external-http
-  namespace: infra
+  namespace: ionline-boutique
   annotations:
     configsync.gke.io/cluster-name-selector: gke-cls-app-nane-1
 spec:
@@ -19,7 +19,7 @@ apiVersion: networking.gke.io/v1
 kind: HealthCheckPolicy
 metadata:
   name: lb-healthcheck
-  namespace: infra
+  namespace: ionline-boutique
   annotations:
     configsync.gke.io/cluster-name-selector: gke-cls-app-nane-1
 spec:
@@ -46,7 +46,7 @@ kind: HTTPRoute
 apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: public-store-route
-  namespace: infra
+  namespace: ionline-boutique
   labels:
     gateway: external-http
 spec:
