@@ -48,6 +48,8 @@ metadata:
   namespace: online-boutique
   labels:
     gateway: external-http
+  annotations:
+    configsync.gke.io/cluster-name-selector: gke-cls-app-euwe-1
 spec:
   hostnames:
     - "store.example.com"
