@@ -16,12 +16,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: loadgenerator
-  namespace: online-boutique
 spec:
   podSelector:
     matchLabels:
       app: loadgenerator
   policyTypes:
-    - Egress
+  - Egress
   egress:
-    - {}
+  - {}
