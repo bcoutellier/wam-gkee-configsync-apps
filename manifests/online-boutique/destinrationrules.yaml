@@ -195,21 +195,3 @@ spec:
           - "topology.istio.io/subzone"
     outlierDetection:
       consecutive5xxErrors: 7
----
-apiVersion: networking.istio.io/v1beta1
-kind: DestinationRule
-metadata:
-  name: adservice
-  namespace: online-boutique
-spec:
-  host: adservice
-  trafficPolicy:
-    loadBalancer:
-      localityLbSetting:
-        failoverPriority:
-          - "topology.istio.io/network"
-          - "topology.kubernetes.io/region"
-          - "topology.kubernetes.io/zone"
-          - "topology.istio.io/subzone"
-    outlierDetection:
-      consecutive5xxErrors: 7
