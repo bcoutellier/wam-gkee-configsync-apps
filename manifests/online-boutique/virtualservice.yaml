@@ -1,0 +1,164 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: currencyservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - currencyservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: currencyservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: productcatalogservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - productcatalogservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: productcatalogservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: checkoutservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - checkoutservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: checkoutservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: shippingservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - shippingservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: shippingservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: cartservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - cartservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: cartservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: redis-cart
+  namespace: online-boutique
+spec:
+  hosts:
+    - redis-cart
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: redis-cart
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: emailservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - emailservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: emailservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: paymentservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - paymentservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: paymentservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: frontend
+  namespace: online-boutique
+spec:
+  hosts:
+    - frontend
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: frontend
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: recommendationservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - recommendationservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: recommendationservice
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: adservice
+  namespace: online-boutique
+spec:
+  hosts:
+    - adservice
+  gateways:
+    - mesh
+  http:
+    - route:
+        - destination:
+            host: adservice
