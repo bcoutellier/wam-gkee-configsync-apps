@@ -3,8 +3,6 @@ apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: external-http
   namespace: online-boutique
-  annotations:
-    configsync.gke.io/cluster-name-selector: gke-cls-app-euwe-1
 spec:
   gatewayClassName: gke-l7-global-external-managed-mc
   listeners:
@@ -20,8 +18,6 @@ kind: HealthCheckPolicy
 metadata:
   name: lb-healthcheck
   namespace: online-boutique
-  annotations:
-    configsync.gke.io/cluster-name-selector: gke-cls-app-euwe-1
 spec:
   default:
     checkIntervalSec: 15
@@ -48,8 +44,6 @@ metadata:
   namespace: online-boutique
   labels:
     gateway: external-http
-  annotations:
-    configsync.gke.io/cluster-name-selector: gke-cls-app-euwe-1
 spec:
   hostnames:
     - "store.example.com"
