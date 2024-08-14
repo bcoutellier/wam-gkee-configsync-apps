@@ -2,7 +2,7 @@ kind: Gateway
 apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: external-http
-  namespace: infra
+  namespace: online-boutique
   annotations:
     configsync.gke.io/cluster-name-selector: "gke-cls-app-euwe-1"
 spec:
@@ -22,7 +22,7 @@ apiVersion: networking.gke.io/v1
 kind: HealthCheckPolicy
 metadata:
   name: lb-healthcheck
-  namespace: infra
+  namespace: online-boutique
   annotations:
     configsync.gke.io/cluster-name-selector: "gke-cls-app-euwe-1"
 spec:
@@ -44,4 +44,25 @@ spec:
     kind: ServiceImport
     name: frontend
     namespace: online-boutique
-
+---
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
+metadata:
+  name: public-store-route
+  namespace: online-boutique
+  labels:
+    gateway: external-http
+  annotations:
+   configsync.gke.io/cluster-name-selector: "gke-cls-app-euwe-1"
+spec:
+  hostnames:
+    - "store.example.com"
+  parentRefs:
+    - name: external-http
+      namespace: infra
+  rules:
+    - backendRefs:
+        - group: net.gke.io
+          kind: ServiceImport
+          name: frontend
+          port: 80
