@@ -12,11 +12,8 @@ spec:
       protocol: HTTP
       port: 80
       allowedRoutes:
-        namespaces:
-          from: Selector
-          selector:
-            matchLabels:
-              shared-gateway-access: "true"
+        kinds:
+          - kind: HTTPRoute
 ---
 apiVersion: networking.gke.io/v1
 kind: HealthCheckPolicy
@@ -43,7 +40,6 @@ spec:
     group: net.gke.io
     kind: ServiceImport
     name: frontend
-    namespace: online-boutique
 ---
 kind: HTTPRoute
 apiVersion: gateway.networking.k8s.io/v1beta1
@@ -53,13 +49,12 @@ metadata:
   labels:
     gateway: external-http
   annotations:
-   configsync.gke.io/cluster-name-selector: "gke-cls-app-euwe-1"
+    configsync.gke.io/cluster-name-selector: "gke-cls-app-euwe-1"
 spec:
   hostnames:
     - "store.example.com"
   parentRefs:
     - name: external-http
-      namespace: infra
   rules:
     - backendRefs:
         - group: net.gke.io
